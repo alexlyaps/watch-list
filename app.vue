@@ -3,18 +3,15 @@
     <h1 class="text-3xl font-bold underline">Hello world!</h1>
     <input class="border" type="text" v-model="search" />
     <button class="border" @click="fetchMovie">Search</button>
-    <div>{{ film?.Year || "" }}</div>
+    <div class="max-w-full">{{ JSON.stringify(film) || "" }}</div>
   </div>
 </template>
 
 <script setup lang="ts">
-interface Film {
-  Tittle: string;
-  Year: string;
-}
+import type { Movie } from "~/types/index.ts";
 
 const search = useState<string>("search", () => "");
-const film = useState<Film | null>("res", () => null);
+const film = useState<Movie | null>("res", () => null);
 
 const fetchMovie = async (): Promise<void> => {
   console.log(search.value);
